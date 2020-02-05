@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+  ""scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG='combinator' node index.js",
+    "start": "DEBUG='combinator' npm run migrate && node index.js",
     "migrate": "sequelize db:migrate"
   },
   "repository": {
