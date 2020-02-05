@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "DEBUG='combinator' node index.js",
     "migrate": "sequelize db:migrate"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/lich666dead/generator-seed#readme",
   "dependencies": {
     "bip39": "^3.0.2",
+    "debug": "^4.1.1",
     "sequelize": "^5.21.3",
     "sqlite3": "^4.1.1"
   },
