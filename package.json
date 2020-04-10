@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  ""scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG='combinator' npm run migrate && node index.js",
+    "start": "DEBUG=combinator:* npm run migrate && node index.js",
     "migrate": "sequelize db:migrate"
   },
   "repository": {
@@ -19,12 +19,14 @@
   },
   "homepage": "https://github.com/lich666dead/generator-seed#readme",
   "dependencies": {
+    "@zilliqa-js/zilliqa": "^0.9.0",
     "bip39": "^3.0.2",
     "debug": "^4.1.1",
-    "sequelize": "^5.21.3",
+    "sequelize": "^5.21.6",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^5.5.1",
+    "tslib": "^1.11.1"
   }
 }
