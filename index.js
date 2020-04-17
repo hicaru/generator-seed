@@ -4,7 +4,7 @@ const { toChecksumAddress, fromBech32Address } = require('@zilliqa-js/crypto');
 const { validation } = require('@zilliqa-js/util');
 const { fact } = require('./utils/combinator');
 
-const AMOUNT_OF_THREADS = 1;
+const AMOUNT_OF_THREADS = 6;
 
 async function run() {
   let isFound = false;
@@ -20,21 +20,24 @@ async function run() {
   const length = fact(array.length);
 
   let queue = [];
+  let point0 = 0;
+  let point1 = length;
 
-  for (let index = 0; index < length; index++) {
+  while (point0 !== point1) {
     if (isFound) {
       break;
     }
 
     if (queue.length > AMOUNT_OF_THREADS) {
       await Promise.all(queue);
+
       queue = [];
     }
 
     queue.push(
       worker(`${__dirname}/utils/get-address.js`, {
         array,
-        index,
+        index: point0,
         address: needFind
       })
         .then((data) => {
@@ -42,8 +45,24 @@ async function run() {
 
           isFound = true;
         })
-        .catch(() => console.log('NEXT', index, 'of', length))
+        .catch(() => console.log('NEXT', point0, 'of', length))
     );
+    queue.push(
+      worker(`${__dirname}/utils/get-address.js`, {
+        array,
+        index: point1,
+        address: needFind
+      })
+        .then((data) => {
+          console.log(data);
+
+          isFound = true;
+        })
+        .catch(() => console.log('NEXT', point1, 'of', length))
+    );
+
+    point0++;
+    point1--;
   }
 }
 
